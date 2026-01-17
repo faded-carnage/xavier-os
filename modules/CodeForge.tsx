@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
-import { 
-  Terminal, Code, Copy, Check, Play, Loader2, Cpu, Sparkles, Wand2, 
-  ShieldCheck, Activity, Zap, Layers, RefreshCw, TerminalSquare, 
-  Lock, Network, FileCode2, Globe
+import {
+  Terminal, Code, Copy, Check, Play, Loader2, Cpu, Sparkles, Wand2,
+  Activity, Zap, RefreshCw, TerminalSquare, Network, FileCode2, Globe
 } from 'lucide-react';
 import { generateAutomationScript } from '../services/geminiService';
 
@@ -11,7 +9,7 @@ export default function CodeForge() {
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<boolean | null>(null);
   const [forgeLogs, setForgeLogs] = useState<string[]>([]);
   const [compilingProgress, setCompilingProgress] = useState(0);
 
@@ -101,15 +99,15 @@ export default function CodeForge() {
         <aside className="lg:col-span-4 space-y-8">
           <div className="glass p-10 rounded-[3.5rem] border border-white/10 space-y-10 bg-black/40 shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 -rotate-45 translate-x-12 -translate-y-12"></div>
-            
+
             <h3 className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/40 flex items-center gap-4">
               <Wand2 size={20} className="text-cyan-400" />
               Strategic Blueprint
             </h3>
-            
+
             <div className="space-y-6">
                <div className="relative group/input">
-                 <textarea 
+                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="e.g. Generate a high-ticket sales funnel automation script with multi-node proxy rotation and biometric sentiment triggers..."
@@ -129,12 +127,12 @@ export default function CodeForge() {
                   </div>
                </div>
 
-               <button 
+               <button
                 onClick={handleGenerate}
                 disabled={loading || !prompt}
                 className={`w-full py-8 rounded-[2.5rem] font-bold text-sm uppercase tracking-[0.5em] flex items-center justify-center gap-6 transition-all shadow-[0_0_80px_rgba(6,182,212,0.1)] border-2 ${
-                  loading 
-                    ? 'bg-white/5 border-white/5 text-white/20' 
+                  loading
+                    ? 'bg-white/5 border-white/5 text-white/20'
                     : 'bg-white text-black border-white/20 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_100px_rgba(6,182,212,0.2)]'
                 }`}
               >
@@ -159,7 +157,7 @@ export default function CodeForge() {
              <div className="space-y-4 max-h-64 overflow-y-auto scrollbar-hide pr-2">
                 {forgeLogs.length > 0 ? forgeLogs.map((log, i) => (
                   <div key={i} className="flex gap-6 p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:border-cyan-500/30 transition-all font-mono text-[10px] animate-in slide-in-from-left-4">
-                     <span className="text-cyan-500 font-bold shrink-0">>>></span>
+                     <span className="text-cyan-500 font-bold shrink-0">{'>>>'}</span>
                      <p className="text-white/60 truncate uppercase tracking-tighter italic">{log}</p>
                   </div>
                 )) : (
@@ -184,7 +182,7 @@ export default function CodeForge() {
         <main className="lg:col-span-8 h-full flex flex-col gap-10">
           <div className="glass rounded-[4.5rem] border border-white/10 flex-1 min-h-[750px] flex flex-col overflow-hidden bg-black shadow-[0_0_150px_rgba(0,0,0,1)] relative group/terminal">
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
-            
+
             {/* Terminal Window Header */}
             <div className="bg-white/5 border-b border-white/10 p-10 flex items-center justify-between relative z-20">
                <div className="flex items-center gap-10">
@@ -200,7 +198,7 @@ export default function CodeForge() {
                   </div>
                </div>
                <div className="flex gap-4">
-                  <button 
+                  <button
                     onClick={copyCode}
                     className="p-5 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-cyan-400 transition-all shadow-inner group/btn relative"
                   >
