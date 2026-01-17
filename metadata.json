@@ -1,0 +1,9 @@
+{
+  "name": "Copy of Xavier AI Ecosystem",
+  "description": "A world-class, multi-module cloud ecosystem featuring military-grade encryption, AI image/video generation, Tor VPN simulation, social collaboration with emotional profiling, dropshipping, and affiliate marketing automation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "xavier-os",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "scan-const": "node find-const-no-init.js",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx || true",
+    "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
