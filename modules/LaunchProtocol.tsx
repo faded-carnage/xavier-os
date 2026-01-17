@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, Loader2, Zap, Globe, Cpu, Lock, Network, Terminal, Activity } from 'lucide-react';
+import { ShieldCheck, Loader2, Zap, Globe, Cpu, Lock, Network } from 'lucide-react';
 
 interface LaunchProtocolProps {
-  onComplete: () => void;
+  onComplete?: () => void;
 }
 
 export default function LaunchProtocol({ onComplete }: LaunchProtocolProps) {
@@ -33,11 +32,11 @@ export default function LaunchProtocol({ onComplete }: LaunchProtocolProps) {
         currentStep++;
       } else {
         clearInterval(interval);
-        setTimeout(onComplete, 2000);
+        if (onComplete) setTimeout(onComplete, 2000);
       }
     }, 1500);
     return () => clearInterval(interval);
-  }, []);
+  }, [onComplete]);
 
   return (
     <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center p-8 overflow-hidden">
@@ -62,8 +61,8 @@ export default function LaunchProtocol({ onComplete }: LaunchProtocolProps) {
               <span>{progress}%</span>
            </div>
            <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden border border-white/10 p-1">
-              <div 
-                className="h-full bg-gradient-to-r from-cyan-600 via-blue-500 to-purple-600 rounded-full transition-all duration-1000 shadow-[0_0_20px_rgba(6,182,212,0.5)]" 
+              <div
+                className="h-full bg-gradient-to-r from-cyan-600 via-blue-500 to-purple-600 rounded-full transition-all duration-1000 shadow-[0_0_20px_rgba(6,182,212,0.5)]"
                 style={{ width: `${progress}%` }}
               ></div>
            </div>
@@ -86,9 +85,9 @@ export default function LaunchProtocol({ onComplete }: LaunchProtocolProps) {
 
         <div className="glass p-8 rounded-[2rem] border border-white/5 bg-black/40 font-mono text-[11px] text-white/40 space-y-2 h-48 overflow-hidden shadow-inner">
            {logs.map((log, i) => (
-             <div key={i} className="animate-in fade-in slide-in-from-left-4">
-                <span className="text-cyan-500/60 mr-4">>>></span>
-                {log}
+             <div key={i} className="animate-in fade-in slide-in-from-left-4 flex gap-3 items-start">
+                <span className="text-cyan-500/60 mr-4">{'>>>'}</span>
+                <div className="flex-1">{log}</div>
              </div>
            ))}
         </div>
