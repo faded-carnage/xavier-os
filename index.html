@@ -1,61 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xavier AI | Sovereign Cloud Ecosystem</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Xavier OS</title>
+
+    <!-- Tailwind (CDN). Note: CDN is fine for quick testing but not recommended for production. -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #010101;
-            color: #ffffff;
-            overflow: hidden;
-            margin: 0;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1a1a1a;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f59e0b;
-        }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "recharts": "https://esm.sh/recharts@^3.6.0",
-    "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "html2canvas": "https://esm.sh/html2canvas@^1.4.1",
-    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
-<body>
+
+    <!-- Add other meta, icons, or head tags as needed -->
+  </head>
+
+  <body>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
-</body>
+
+    <!--
+      Disabled: external raw TSX module was causing CORS / parse errors in the browser.
+      DO NOT load raw .tsx/.ts files directly in the browser. Browsers expect JS.
+      The line below is intentionally commented out to prevent the "Missing initializer" SyntaxError.
+    -->
+    <!-- <script type="module" src="https://ai.studio/index.tsx"></script> -->
+
+    <!--
+      Safer fallback: attempt to load a compiled JS build from the provider (index.js).
+      This will fail gracefully if the provider doesn't serve a JS bundle with CORS headers.
+      If you obtain a compiled JS module from the provider or host it locally, update the URL.
+    -->
+    <script type="module">
+      (async () => {
+        try {
+          // Try to load a compiled JS module (provider must serve JS with CORS headers).
+          await import('https://ai.studio/index.js');
+          console.log('Loaded remote ai.studio module');
+        } catch (err) {
+          console.warn(
+            'Remote ai.studio module failed to load (CORS/TSX). Feature disabled.',
+            err
+          );
+          // Optional: load a local fallback implementation instead:
+          // try { await import('/local-fallback-ai.js'); } catch(e){ console.error(e); }
+        }
+      })();
+    </script>
+
+    <!-- Main application entry (adjust path if your entry is elsewhere) -->
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
